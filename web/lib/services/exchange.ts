@@ -1,0 +1,42 @@
+import { createClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
+
+// Type definition for the data retrieved from the v_latest_exchange_board view
+export type ExchangeRate = {
+  entity_type: string;
+  entity_name: string;
+  buy_rate: number;
+  sell_rate: number;
+  spread: number | null;
+  source_updated_at: string | null;
+  created_at: string;
+};
+
+/**
+ * Fetches the latest exchange rates from Supabase.
+ * The results are cached using Next.js unstable_cache, greatly reducing DB loads
+ * since this data doesn't update very frequently.
+ */
+export const getLatestExchangeRates = unstable_cache(
+  async (): Promise<ExchangeRate[]> => {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+    );
+    const { data, error } = await supabase
+      .from("v_latest_exchange_board")
+      .select("*");
+
+    if (error) {
+      console.error("Error fetching exchange rates:", error);
+      throw new Error(error.message);
+    }
+
+    return data as ExchangeRate[];
+  },
+  ["latest-exchange-rates"], // Cache key
+  {
+    revalidate: 3600, // Revalidate cache every 1 hour (3600 seconds)
+    tags: ["exchange-rates"], // Tag for on-demand revalidation if needed
+  }
+);

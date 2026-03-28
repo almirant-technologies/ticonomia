@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Blog | Ticonomia",
+  title: "Blog | Ticonomía",
   description: "Lee nuestras últimas actualizaciones sobre conversión de divisas.",
 };
 
@@ -9,7 +9,7 @@ export default function BlogPage() {
       <div className="prose dark:prose-invert">
         <h1 className="text-4xl font-extrabold tracking-tight mb-4">Nuestro Blog</h1>
         <p className="text-lg text-muted-foreground mb-8">
-          ¡Bienvenido al blog de Ticonomia! Aquí encontrarás las últimas noticias, actualizaciones y análisis profundos sobre las tendencias de las divisas.
+          ¡Bienvenido al blog de Ticonomía! Aquí encontrarás las últimas noticias, actualizaciones y análisis profundos sobre las tendencias de las divisas.
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

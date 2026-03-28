@@ -1,6 +1,6 @@
-# Ticonomia
+# Ticonomía
 
-Ticonomia es un conversor de monedas y visor de tipos de cambio centrado en Costa Rica. El proyecto incluye información obtenida en tiempo real desde distintas fuentes (bancos, cooperativas, etc.) mediante Supabase y una aplicación web desarrollada en **Next.js**.
+Ticonomía es un conversor de monedas y visor de tipos de cambio centrado en Costa Rica. El proyecto incluye información obtenida en tiempo real desde distintas fuentes (bancos, cooperativas, etc.) mediante Supabase y una aplicación web desarrollada en **Next.js**.
 
 ## Estructura del Proyecto
 
