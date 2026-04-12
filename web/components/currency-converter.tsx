@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowLeftRight, ArrowRightLeft } from "lucide-react";
 import type { ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 
@@ -169,10 +170,12 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
               }`}
             >
               <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-white border border-muted/50 shrink-0 flex items-center justify-center p-1">
-                <img 
+                <Image 
                   src={`/logos/${entity.entity_name}.jpg`} 
                   alt=""
                   aria-hidden="true"
+                  width={56}
+                  height={56}
                   className="object-contain w-full h-full rounded-lg"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
