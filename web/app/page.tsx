@@ -1,21 +1,20 @@
-import { getLatestExchangeRates, ExchangeRate } from "@/lib/services/exchange";
+import { getLatestExchangeRates, getDisplayedEntities, ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 import { CurrencyConverter } from "@/components/currency-converter";
 
 export default async function Home() {
-  let data: ExchangeRate[] | null = null;
+  let exchangeRates: ExchangeRate[] | null = null;
+  let displayedEntities: DisplayedEntity[] | null = null;
   let error;
   try {
-    data = await getLatestExchangeRates();
+    const [fetchedRates, fetchedEntities] = await Promise.all([
+      getLatestExchangeRates(),
+      getDisplayedEntities(),
+    ]);
+    exchangeRates = fetchedRates;
+    displayedEntities = fetchedEntities;
   } catch (err: any) {
     error = err;
   }
-
-  // Find the required entity "Banco Central de Costa Rica"
-  const bccr = data?.find((d) => d.entity_name === "Banco Central de Costa Rica");
-  
-  // Default values if data not found (to ensure SSR doesn't fail)
-  const defaultBuyRate = bccr?.buy_rate || 500;
-  const defaultSellRate = bccr?.sell_rate || 510;
 
   return (
     <div className="w-full flex-1 flex flex-col gap-12">
@@ -26,7 +25,7 @@ export default async function Home() {
             <p className="text-sm text-destructive">{error.message}</p>
           </div>
         ) : (
-          <CurrencyConverter buyRate={defaultBuyRate} sellRate={defaultSellRate} />
+          <CurrencyConverter exchangeRates={exchangeRates || []} displayedEntities={displayedEntities || []} />
         )}
       </div>
     </div>

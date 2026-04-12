@@ -40,3 +40,39 @@ export const getLatestExchangeRates = unstable_cache(
     tags: ["exchange-rates"], // Tag for on-demand revalidation if needed
   }
 );
+
+// Type definition for the data retrieved from the vw_displayed_entities view
+export type DisplayedEntity = {
+  id: string;
+  entity_name: string;
+  entity_type: string;
+  preferred_entity: boolean;
+};
+
+/**
+ * Fetches the displayed entities from Supabase.
+ * The results are cached using Next.js unstable_cache.
+ */
+export const getDisplayedEntities = unstable_cache(
+  async (): Promise<DisplayedEntity[]> => {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+    );
+    const { data, error } = await supabase
+      .from("vw_displayed_entities")
+      .select("*");
+
+    if (error) {
+      console.error("Error fetching displayed entities:", error);
+      throw new Error(error.message);
+    }
+
+    return data as DisplayedEntity[];
+  },
+  ["displayed-entities"], // Cache key
+  {
+    revalidate: 3600, // Revalidate cache every 1 hour (3600 seconds)
+    tags: ["displayed-entities"], // Tag for on-demand revalidation if needed
+  }
+);
