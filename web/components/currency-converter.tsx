@@ -149,14 +149,20 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
       </div>
 
       {/* Entity Selector */}
-      <div className="w-full bg-card border rounded-3xl p-6 shadow-sm">
-        <h3 className="text-lg font-semibold mb-4 text-center">Selecciona una entidad</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div 
+        className="w-full bg-card border rounded-3xl p-6 shadow-sm"
+        role="radiogroup"
+        aria-labelledby="entity-selector-title"
+      >
+        <h3 id="entity-selector-title" className="text-lg font-semibold mb-4 text-center">Selecciona una entidad</h3>
+        <div id="entity-grid" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {entitiesToDisplay.map(entity => (
             <button
               key={entity.id}
+              role="radio"
+              aria-checked={activeEntityName === entity.entity_name}
               onClick={() => setSelectedEntityName(entity.entity_name)}
-              className={`flex flex-col items-center justify-center text-center gap-3 p-3 rounded-2xl border transition-all ${
+              className={`flex flex-col items-center justify-center text-center gap-3 p-3 rounded-2xl border transition-all cursor-pointer ${
                 activeEntityName === entity.entity_name 
                   ? "bg-primary/5 border-primary ring-2 ring-primary/20 shadow-md transform scale-[1.02]" 
                   : "bg-background hover:bg-muted hover:border-border/80"
@@ -165,7 +171,8 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
               <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-white border border-muted/50 shrink-0 flex items-center justify-center p-1">
                 <img 
                   src={`/logos/${entity.entity_name}.jpg`} 
-                  alt={`Logo de ${entity.entity_name}`}
+                  alt=""
+                  aria-hidden="true"
                   className="object-contain w-full h-full rounded-lg"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
@@ -182,7 +189,9 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
           <div className="mt-6 flex justify-center">
             <button
               onClick={() => setShowAllEntities(true)}
-              className="text-sm font-medium px-5 py-2.5 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full transition-colors border shadow-sm"
+              aria-expanded="false"
+              aria-controls="entity-grid"
+              className="text-sm font-medium px-5 py-2.5 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full transition-colors border shadow-sm cursor-pointer"
             >
               Mostrar todas
             </button>
@@ -192,7 +201,9 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
           <div className="mt-6 flex justify-center">
             <button
               onClick={() => setShowAllEntities(false)}
-              className="text-sm font-medium px-5 py-2.5 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full transition-colors border shadow-sm"
+              aria-expanded="true"
+              aria-controls="entity-grid"
+              className="text-sm font-medium px-5 py-2.5 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full transition-colors border shadow-sm cursor-pointer"
             >
               Mostrar menos
             </button>
