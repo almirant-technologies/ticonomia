@@ -4,8 +4,6 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { hasEnvVars } from "@/lib/utils";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -50,7 +48,6 @@ export default function RootLayout({
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    {!hasEnvVars && <EnvVarWarning />}
                   </div>
                 </div>
               </nav>
@@ -60,17 +57,7 @@ export default function RootLayout({
               </div>
 
               <footer className="w-full flex items-center justify-center border-t py-8 text-sm gap-8 mt-16">
-                <p>
-                  Desarrollado con {" "}
-                  <a
-                    href="https://supabase.com"
-                    target="_blank"
-                    className="font-bold hover:underline"
-                    rel="noreferrer"
-                  >
-                    Supabase
-                  </a>
-                </p>
+                <p>Ticonomía &copy; 2026</p>
                 <ThemeSwitcher />
               </footer>
             </div>
