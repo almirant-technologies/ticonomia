@@ -1,6 +1,19 @@
 import { createClient } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 
+function getSupabasePublicConfig() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !publishableKey) {
+    throw new Error(
+      "Faltan variables de entorno de Supabase. Configure NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY en web/.env.local."
+    );
+  }
+
+  return { url, publishableKey };
+}
+
 // Type definition for the data retrieved from the v_latest_exchange_board view
 export type ExchangeRate = {
   entity_type: string;
@@ -19,10 +32,8 @@ export type ExchangeRate = {
  */
 export const getLatestExchangeRates = unstable_cache(
   async (): Promise<ExchangeRate[]> => {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-    );
+    const { url, publishableKey } = getSupabasePublicConfig();
+    const supabase = createClient(url, publishableKey);
     const { data, error } = await supabase
       .from("v_latest_exchange_board")
       .select("*");
@@ -55,10 +66,8 @@ export type DisplayedEntity = {
  */
 export const getDisplayedEntities = unstable_cache(
   async (): Promise<DisplayedEntity[]> => {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
-    );
+    const { url, publishableKey } = getSupabasePublicConfig();
+    const supabase = createClient(url, publishableKey);
     const { data, error } = await supabase
       .from("vw_displayed_entities")
       .select("*");
