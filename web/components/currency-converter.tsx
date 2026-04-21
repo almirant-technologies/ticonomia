@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowLeftRight, ArrowRightLeft } from "lucide-react";
+import { ArrowLeftRight, ArrowRightLeft, ArrowRight } from "lucide-react";
 import type { ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 
 interface CurrencyConverterProps {
@@ -29,6 +29,8 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
   const currentRate = exchangeRates.find(r => r.entity_name === activeEntityName);
   const buyRate = currentRate?.buy_rate || 500;
   const sellRate = currentRate?.sell_rate || 510;
+
+  const activeLink = sortedEntities.find(e => e.entity_name === activeEntityName)?.link;
 
   const isCrcToUsd = direction === "crc-to-usd";
 
@@ -142,11 +144,24 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
       </div>
 
       {/* Optional Context about current active rate */}
-      <div className="text-sm text-muted-foreground">
-        Usando tasas de {activeEntityName}:{" "}
-        <span className="font-semibold text-foreground">
-          {isCrcToUsd ? `Venta: ₡${sellRate}` : `Compra: ₡${buyRate}`}
-        </span>
+      <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-muted-foreground my-2">
+        <div>
+          Usando tasas de {activeEntityName}:{" "}
+          <span className="font-semibold text-foreground">
+            {isCrcToUsd ? `Venta: ₡${sellRate}` : `Compra: ₡${buyRate}`}
+          </span>
+        </div>
+        {activeLink && (
+          <a
+            href={activeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visitar el sitio web de ${activeEntityName} (abre en una nueva pestaña)`}
+            className="flex items-center gap-1.5 text-blue-500 hover:text-blue-600 transition-colors font-medium hover:underline"
+          >
+            Dirígeme a la entidad <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </a>
+        )}
       </div>
 
       {/* Entity Selector */}

@@ -57,6 +57,7 @@ export type DisplayedEntity = {
   id: string;
   entity_name: string;
   entity_type: string;
+  link: string | null;
   preferred_entity: boolean;
 };
 
@@ -69,7 +70,7 @@ export const getDisplayedEntities = unstable_cache(
     const { url, publishableKey } = getSupabasePublicConfig();
     const supabase = createClient(url, publishableKey);
     const { data, error } = await supabase
-      .from("vw_displayed_entities")
+      .from("v_displayed_entities")
       .select("*");
 
     if (error) {

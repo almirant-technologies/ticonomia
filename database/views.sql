@@ -15,3 +15,9 @@ FROM (
 ) AS sub
 -- Step 2: Apply your specific display order
 ORDER BY entity_type ASC, entity_name ASC;
+
+-- View to retrieve only the entities marked for display
+CREATE VIEW v_displayed_entities AS
+SELECT id, entity_name, entity_type, link, preferred_entity
+FROM entities
+WHERE display_entity = true;

@@ -14,8 +14,30 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Ticonomía | Conversor de Monedas",
-  description: "La forma más rápida de comparar tipos de cambio en Costa Rica.",
+  title: {
+    default: "Ticonomía | Tipo de Cambio en Costa Rica",
+    template: "%s | Ticonomía"
+  },
+  description: "La forma más rápida de comparar tipos de cambio del dólar en bancos de Costa Rica. Entérate del precio de compra y venta del dólar a colones y viceversa en tiempo real.",
+  keywords: ["tipo de cambio costa rica", "precio del dolar costa rica", "dólar a colón", "colón a dólar", "cambio de dolares costa rica", "compra y venta de dolares", "bancos costa rica", "conversión de moneda", "tipo de cambio bccr"],
+  authors: [{ name: "Ticonomía" }],
+  creator: "Ticonomía",
+  openGraph: {
+    type: "website",
+    locale: "es_CR",
+    url: defaultUrl,
+    title: "Ticonomía | Precio del Dólar en Bancos de Costa Rica",
+    description: "Compara al instante el tipo de cambio del dólar a colón en las principales entidades financieras y bancos de Costa Rica.",
+    siteName: "Ticonomía",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ticonomía | Tipo de Cambio Costa Rica",
+    description: "Comparador del precio del dólar en bancos de Costa Rica.",
+  },
+  alternates: {
+    canonical: defaultUrl,
+  }
 };
 
 const geistSans = Geist({
@@ -28,26 +50,15 @@ const footerSections = [
   {
     title: "Explorar",
     links: [
-      { href: "/", label: "Inicio" },
       { href: "/", label: "Conversor de monedas" },
-      { href: "/blog", label: "Blog" },
-    ],
-  },
-  {
-    title: "Contenido",
-    links: [
-      { href: "/", label: "Tipos de cambio" },
-      { href: "/", label: "Compra y venta" },
-      { href: "/", label: "Comparar entidades" },
     ],
   },
   {
     title: "Ticonomía",
     links: [
       { href: "/nosotros", label: "Nosotros" },
-      { href: "/nosotros", label: "Nuestra misión" },
-      { href: "/nosotros", label: "Transparencia" },
-      { href: "/blog", label: "Columna de opinion" },
+      { href: "/fuente-datos", label: "Fuente de datos" },
+      { href: "/cookies", label: "Política de cookies" },
     ],
   },
 ];
@@ -58,8 +69,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+    <html lang="es-CR" suppressHydrationWarning>
+      <body className={`${geistSans.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -69,22 +80,18 @@ export default function RootLayout({
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                  <div className="flex gap-6 items-center font-semibold">
-                    <Link href={"/"} className="flex items-center" aria-label="Ticonomía home">
-                      <Image
-                        src="/logos/ticonomia%20logo.svg"
-                        alt="Ticonomía"
-                        width={148}
-                        height={36}
-                        priority
-                        className="h-9 w-auto dark:brightness-0 dark:invert"
-                      />
-                    </Link>
-                    <HeaderNav />
-                  </div>
-                  <div className="flex items-center gap-4">
-                  </div>
+                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm font-semibold">
+                  <Link href={"/"} className="flex items-center" aria-label="Ticonomía home">
+                    <Image
+                      src="/logos/ticonomia%20logo.svg"
+                      alt="Ticonomía"
+                      width={132}
+                      height={32}
+                      priority
+                      className="h-8 w-auto dark:brightness-0 dark:invert"
+                    />
+                  </Link>
+                  <HeaderNav />
                 </div>
               </nav>
 
@@ -94,17 +101,17 @@ export default function RootLayout({
 
               <CookieTermsBanner />
 
-              <footer className="w-full border-t border-foreground/10 mt-16 bg-secondary/20">
-                <div className="mx-auto flex w-full max-w-6xl flex-col px-8 py-14 md:px-10 md:py-16">
-                  <div className="grid gap-14 border-b border-foreground/10 pb-14 md:grid-cols-[148px_1fr] md:gap-20 lg:grid-cols-[148px_repeat(3,minmax(0,1fr))]">
+              <footer className="w-full border-t border-foreground/10 mt-8 bg-secondary/20">
+                <div className="mx-auto flex w-full max-w-6xl flex-col px-8 py-8 md:px-10 md:py-8">
+                  <div className="flex flex-col gap-8 border-b border-foreground/10 pb-8 md:flex-row md:gap-16 lg:gap-24">
                     <div className="flex flex-col gap-4">
                       <Link href="/" className="inline-flex w-fit items-center" aria-label="Ticonomía home">
                         <Image
                           src="/logos/ticonomia%20logo.svg"
                           alt="Ticonomía"
-                          width={96}
-                          height={96}
-                          className="h-12 w-auto dark:brightness-0 dark:invert"
+                          width={132}
+                          height={32}
+                          className="h-8 w-auto dark:brightness-0 dark:invert"
                         />
                       </Link>
                       <p className="max-w-[11rem] text-xs leading-5 text-muted-foreground">
@@ -133,14 +140,10 @@ export default function RootLayout({
                     ))}
                   </div>
 
-                  <div className="flex flex-col gap-7 py-9 text-[11px] leading-5 text-muted-foreground md:flex-row md:items-end md:justify-between">
+                  <div className="flex flex-col gap-4 py-6 text-[11px] leading-5 text-muted-foreground md:flex-row md:items-end md:justify-between">
                     <div className="max-w-4xl space-y-2">
                       <p>
-                        &copy; 2026 Ticonomía. Todos los derechos reservados. El uso de este sitio implica la aceptación de nuestros{" "}
-                        <Link href="/terminos" className="underline decoration-foreground/30 underline-offset-2 hover:text-foreground">
-                          términos y condiciones
-                        </Link>{" "}
-                        y la{" "}
+                        &copy; 2026 Ticonomía. Todos los derechos reservados. El uso de este sitio implica la aceptación de nuestra{" "}
                         <Link href="/cookies" className="underline decoration-foreground/30 underline-offset-2 hover:text-foreground">
                           política de cookies
                         </Link>

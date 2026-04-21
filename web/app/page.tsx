@@ -1,6 +1,18 @@
 import { getLatestExchangeRates, getDisplayedEntities, ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 import { CurrencyConverter } from "@/components/currency-converter";
 
+function getJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Ticonomía",
+    alternateName: "Tipo de Cambio Costa Rica",
+    url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000",
+    description: "Comparador de tipo de cambio del dólar y colón en bancos físicos y entidades financieras de Costa Rica.",
+    inLanguage: "es-CR"
+  };
+}
+
 export default async function Home() {
   let exchangeRates: ExchangeRate[] | null = null;
   let displayedEntities: DisplayedEntity[] | null = null;
@@ -18,6 +30,11 @@ export default async function Home() {
 
   return (
     <div className="w-full flex-1 flex flex-col gap-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getJsonLd()) }}
+      />
+      <h1 className="sr-only">Tipo de Cambio del Dólar a Colón en Bancos de Costa Rica</h1>
       <div className="flex flex-col gap-6 mt-8">
         {error ? (
           <div className="p-6 border rounded-lg bg-card shadow-sm">

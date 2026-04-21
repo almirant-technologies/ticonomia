@@ -1,6 +1,7 @@
 export const metadata = {
-  title: "Nosotros | Ticonomía",
-  description: "Aprende más sobre el equipo detrás de Ticonomía.",
+  title: "Nosotros",
+  description: "Conoce al equipo detrás de Ticonomía, tu comparador de tipo de cambio de dólares a colones en Costa Rica. Creado para brindar transparencia financiera.",
+  keywords: ["sobre ticonomía", "equipo", "quiénes somos", "tipo de cambio costa rica", "transparencia de bancos", "bancos en costa rica"],
 };
 
 export default function AboutUsPage() {
@@ -13,32 +14,29 @@ export default function AboutUsPage() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="bg-muted rounded-2xl p-8 aspect-video flex items-center justify-center">
-          {/* Placeholder for a nice image or illustration */}
-          <p className="text-muted-foreground font-medium">[ Ilustración del Equipo de Oficina ]</p>
+      <div className="max-w-2xl mx-auto flex flex-col gap-8 w-full">
+        <div>
+          <h3 className="text-2xl font-bold mb-2">Nuestra Misión</h3>
+          <p className="text-muted-foreground">
+            Creemos que los datos financieros deben ser accesibles para todos. Al analizar datos en tiempo real de varios bancos públicos y privados, proporcionamos una pizarra de cambios unificada para ayudarte a ahorrar dinero.
+          </p>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div>
-            <h3 className="text-2xl font-bold mb-2">Nuestra Misión</h3>
-            <p className="text-muted-foreground">
-              Creemos que los datos financieros deben ser accesibles para todos. Al analizar datos en tiempo real de varios bancos públicos y privados, proporcionamos una pizarra de cambios unificada para ayudarte a ahorrar dinero.
-            </p>
-          </div>
+        <div>
+          <h3 className="text-2xl font-bold mb-2">Por Qué Empezamos</h3>
+          <p className="text-muted-foreground">
+            El proyecto comenzó como una idea sencilla: eliminar las conjeturas al cambiar divisas. Recopilar tipos de cambio diarios manualmente es tedioso. Ticonomía automatiza este proceso de forma nativa.
+          </p>
+        </div>
 
-          <div>
-            <h3 className="text-2xl font-bold mb-2">Por Qué Empezamos</h3>
-            <p className="text-muted-foreground">
-              El proyecto comenzó como una idea sencilla: eliminar las conjeturas al cambiar divisas. Recopilar tipos de cambio diarios manualmente es tedioso. Ticonomía automatiza este proceso de forma nativa.
-            </p>
-          </div>
-
-          <div className="mt-4 pt-4 border-t">
-            <p className="italic text-sm text-muted-foreground">
-              "Brindando transparencia donde importa."
-            </p>
-          </div>
+        <div>
+          <h3 className="text-2xl font-bold mb-2">Contáctanos</h3>
+          <p className="text-muted-foreground">
+            ¿Tienes alguna pregunta o sugerencia? Nos encantaría escucharte. Puedes contactarnos en{" "}
+            <a href="mailto:ticonomia@proton.me" className="font-medium text-primary hover:underline transition-all">
+              ticonomia@proton.me
+            </a>
+          </p>
         </div>
       </div>
     </div>
