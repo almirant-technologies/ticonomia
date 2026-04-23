@@ -8,14 +8,17 @@ import { CookieTermsBanner } from "@/components/cookie-terms-banner";
 import { HeaderNav } from "@/components/header-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const defaultUrl = process.env.NODE_ENV === "production"
+  ? "https://ticonomia.com"
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: {
-    default: "Ticonomía | Tipo de Cambio en Costa Rica",
+    default: "Tipo de Cambio en Costa Rica | Ticonomía",
     template: "%s | Ticonomía"
   },
   description: "La forma más rápida de comparar tipos de cambio del dólar en bancos de Costa Rica. Entérate del precio de compra y venta del dólar a colones y viceversa en tiempo real.",
