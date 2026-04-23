@@ -9,6 +9,7 @@ import { HeaderNav } from "@/components/header-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const defaultUrl = process.env.NODE_ENV === "production"
   ? "https://ticonomia.com"
@@ -179,6 +180,7 @@ export default function RootLayout({
           </main>
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
