@@ -83,7 +83,7 @@ export default function RootLayout({
                 <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm font-semibold">
                   <Link href={"/"} className="flex items-center" aria-label="Ticonomía home">
                     <Image
-                      src="/logos/ticonomia%20logo.svg"
+                      src="/logos/ticonomia-logo.svg"
                       alt="Ticonomía"
                       width={132}
                       height={32}
@@ -107,7 +107,7 @@ export default function RootLayout({
                     <div className="flex flex-col gap-4">
                       <Link href="/" className="inline-flex w-fit items-center" aria-label="Ticonomía home">
                         <Image
-                          src="/logos/ticonomia%20logo.svg"
+                          src="/logos/ticonomia-logo.svg"
                           alt="Ticonomía"
                           width={132}
                           height={32}
