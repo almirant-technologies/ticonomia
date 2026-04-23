@@ -7,6 +7,7 @@ import Link from "next/link";
 import { CookieTermsBanner } from "@/components/cookie-terms-banner";
 import { HeaderNav } from "@/components/header-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import Script from "next/script";
 
 const defaultUrl = process.env.NODE_ENV === "production"
   ? "https://ticonomia.com"
@@ -73,6 +74,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-CR" suppressHydrationWarning>
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-28EL9LWGDY" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-28EL9LWGDY');
+          `}
+        </Script>
+      </head>
       <body className={`${geistSans.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
