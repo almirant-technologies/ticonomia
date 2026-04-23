@@ -8,6 +8,7 @@ import { CookieTermsBanner } from "@/components/cookie-terms-banner";
 import { HeaderNav } from "@/components/header-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const defaultUrl = process.env.NODE_ENV === "production"
   ? "https://ticonomia.com"
@@ -177,6 +178,7 @@ export default function RootLayout({
             </div>
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
