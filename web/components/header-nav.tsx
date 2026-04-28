@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 
 const items = [
   { href: "/", label: "Conversor de Monedas" },
+  { href: "/blog", label: "Blog" },
   { href: "/nosotros", label: "Nosotros" },
 ];
 
