@@ -5,6 +5,13 @@ import Image from "next/image";
 import { ArrowLeftRight, ArrowRightLeft, ArrowRight } from "lucide-react";
 import type { ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 
+const formatNumberWithCommas = (val: string | number) => {
+  if (val === "" || val === null || val === undefined) return "";
+  const parts = val.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+};
+
 interface CurrencyConverterProps {
   exchangeRates: ExchangeRate[];
   displayedEntities: DisplayedEntity[];
@@ -41,25 +48,29 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
   let rightVal = "";
 
   if (activeInput === "left") {
-    leftVal = amount;
+    leftVal = formatNumberWithCommas(amount);
     if (amount) {
-      rightVal = isCrcToUsd ? (numAmount / sellRate).toFixed(2) : (numAmount * buyRate).toFixed(2);
+      rightVal = formatNumberWithCommas(isCrcToUsd ? (numAmount / sellRate).toFixed(2) : (numAmount * buyRate).toFixed(2));
     }
   } else {
-    rightVal = amount;
+    rightVal = formatNumberWithCommas(amount);
     if (amount) {
-      leftVal = isCrcToUsd ? (numAmount * sellRate).toFixed(2) : (numAmount / buyRate).toFixed(2);
+      leftVal = formatNumberWithCommas(isCrcToUsd ? (numAmount * sellRate).toFixed(2) : (numAmount / buyRate).toFixed(2));
     }
   }
 
   const handleLeftChange = (val: string) => {
+    const rawVal = val.replace(/,/g, "");
+    if (rawVal && !/^\d*\.?\d*$/.test(rawVal)) return;
     setActiveInput("left");
-    setAmount(val);
+    setAmount(rawVal);
   };
 
   const handleRightChange = (val: string) => {
+    const rawVal = val.replace(/,/g, "");
+    if (rawVal && !/^\d*\.?\d*$/.test(rawVal)) return;
     setActiveInput("right");
-    setAmount(val);
+    setAmount(rawVal);
   };
 
   const toggleDirection = () => {
@@ -81,7 +92,13 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
             {isCrcToUsd ? "colones" : "dólares"}
           </span>
         </div>
-        <ArrowLeftRight className="w-6 h-6 sm:w-8 sm:h-8 font-light text-muted-foreground mx-2" aria-hidden="true" />
+        <button
+          onClick={toggleDirection}
+          className="p-3 bg-card hover:bg-muted border shadow-md rounded-full transition-all group mx-2 shrink-0"
+          aria-label="Intercambiar conversión de divisas"
+        >
+          <ArrowRightLeft className="w-7 h-7 text-lime-500 group-hover:scale-110 transition-transform" aria-hidden="true" />
+        </button>
         <div className="flex flex-col sm:flex-row leading-[1.1] sm:leading-tight">
           <span>Quiero</span>
           <span className={`sm:ml-2 ${!isCrcToUsd ? "text-blue-500" : "text-lime-500"}`}>
@@ -102,7 +119,8 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
           <div className="relative">
             <input
               id="left-input"
-              type="number"
+              type="text"
+              inputMode="decimal"
               value={leftVal}
               onChange={(e) => handleLeftChange(e.target.value)}
               placeholder="0"
@@ -130,7 +148,8 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
           <div className="relative">
             <input
               id="right-input"
-              type="number"
+              type="text"
+              inputMode="decimal"
               value={rightVal}
               onChange={(e) => handleRightChange(e.target.value)}
               placeholder="0"
