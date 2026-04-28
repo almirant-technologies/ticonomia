@@ -33,6 +33,32 @@ Aplicación disponible en [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## 📝 Cómo crear un nuevo artículo del Blog
+
+Para publicar una nueva entrada en el blog de Ticonomía, sigue estos dos sencillos pasos:
+
+1. **Crear el archivo de contenido:**
+   Crea un nuevo archivo con extensión `.md` (Markdown) dentro de la carpeta `web/content/blogs/`. El nombre del archivo debe ser el "slug" (identificador en la URL) de tu artículo. Por ejemplo: `web/content/blogs/mi-nuevo-articulo.md`.
+   Escribe el cuerpo del post utilizando el formato Markdown.
+
+2. **Registrar la metadata:**
+   Abre el archivo `web/lib/blogs.ts` y agrega un nuevo objeto al inicio del arreglo `publishedBlogs` con toda la información de la publicación. Asegúrate de que el campo `file` apunte exactamente al archivo que acabas de crear.
+
+```typescript
+{
+  slug: "mi-nuevo-articulo",
+  title: "El Título de mi Nuevo Artículo",
+  subtitle: "Un subtítulo descriptivo que aparecerá en la tarjeta.",
+  headerImage: "/blog-images/mi-imagen.jpg", // Asegúrate de que exista en /web/public
+  datePublished: "2026-05-01",
+  readingTime: "5 min",
+  author: "Tu Nombre",
+  file: "content/blogs/mi-nuevo-articulo.md",
+}
+```
+
+---
+
 ## 📄 Licencia
 
 Este proyecto se distribuye bajo una licencia de software **propietario**. El código es público por transparencia, pero **no es de código abierto (Open Source)**.

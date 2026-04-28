@@ -57,6 +57,7 @@ const footerSections = [
     title: "Explorar",
     links: [
       { href: "/", label: "Conversor de monedas" },
+      { href: "/blog", label: "Blog" },
     ],
   },
   {
