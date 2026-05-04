@@ -1,5 +1,7 @@
 import { getLatestExchangeRates, getDisplayedEntities, ExchangeRate, DisplayedEntity } from "@/lib/services/exchange";
 import { CurrencyConverter } from "@/components/currency-converter";
+import { HowToSection } from "@/components/how-to-section";
+import { FaqSection } from "@/components/faq-section";
 
 function getJsonLd() {
   return {
@@ -44,6 +46,10 @@ export default async function Home() {
         ) : (
           <CurrencyConverter exchangeRates={exchangeRates || []} displayedEntities={displayedEntities || []} />
         )}
+      </div>
+      <HowToSection />
+      <div className="py-6">
+        <FaqSection />
       </div>
     </div>
   );
