@@ -80,7 +80,7 @@ export function CurrencyConverter({ exchangeRates, displayedEntities }: Currency
 
   return (
     <div 
-      className="flex flex-col items-center w-full max-w-4xl mx-auto gap-6 sm:gap-8 pt-4 pb-2 sm:pt-10 sm:pb-4"
+      className="flex flex-col items-center w-full gap-6 sm:gap-8 pt-4 pb-2 sm:pt-10 sm:pb-4"
       role="region"
       aria-label="Conversor de monedas"
     >

@@ -15,6 +15,13 @@ export function CookieTermsBanner() {
 
   const acceptConsent = () => {
     window.localStorage.setItem(CONSENT_KEY, "accepted");
+    window.dispatchEvent(new Event("consent-updated"));
+    setIsVisible(false);
+  };
+
+  const declineConsent = () => {
+    window.localStorage.setItem(CONSENT_KEY, "declined");
+    window.dispatchEvent(new Event("consent-updated"));
     setIsVisible(false);
   };
 
@@ -27,14 +34,20 @@ export function CookieTermsBanner() {
       <div className="flex w-full flex-col gap-4 border-t border-lime-600 bg-lime-500 px-5 py-5 text-white shadow-2xl shadow-lime-500/30 sm:flex-row sm:items-end sm:justify-between sm:px-6">
         <div className="max-w-3xl space-y-2">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-lime-50">
-            Cookies y términos
+            Privacidad y cookies
           </p>
           <p className="text-sm leading-6 text-white/95 sm:text-[15px]">
-            Usamos cookies para mejorar la experiencia y medir el uso del sitio. Al continuar,
-            aceptas nuestra <Link href="/cookies" className="font-semibold underline underline-offset-4 hover:text-lime-100">política de cookies</Link> y los <Link href="/terminos" className="font-semibold underline underline-offset-4 hover:text-lime-100">términos y condiciones</Link>.
+            Usamos cookies para mejorar la experiencia y medir el uso del sitio. Puedes aceptar o rechazar nuestra <Link href="/privacidad" className="font-semibold underline underline-offset-4 hover:text-lime-100">política de privacidad</Link> y <Link href="/cookies" className="font-semibold underline underline-offset-4 hover:text-lime-100">política de cookies</Link>.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-3">
+          <button
+            type="button"
+            onClick={declineConsent}
+            className="inline-flex min-w-28 items-center justify-center rounded-full bg-lime-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lime-700 border border-lime-500/50"
+          >
+            Rechazar
+          </button>
           <button
             type="button"
             onClick={acceptConsent}

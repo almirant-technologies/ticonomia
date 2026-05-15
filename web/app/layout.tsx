@@ -7,9 +7,7 @@ import Link from "next/link";
 import { CookieTermsBanner } from "@/components/cookie-terms-banner";
 import { HeaderNav } from "@/components/header-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { AnalyticsProvider } from "@/components/analytics-provider";
 
 const defaultUrl = process.env.NODE_ENV === "production"
   ? "https://ticonomia.com"
@@ -65,6 +63,7 @@ const footerSections = [
     links: [
       { href: "/nosotros", label: "Nosotros" },
       { href: "/fuente-datos", label: "Fuente de datos" },
+      { href: "/privacidad", label: "Política de privacidad" },
       { href: "/cookies", label: "Política de cookies" },
     ],
   },
@@ -77,17 +76,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-CR" suppressHydrationWarning>
-      <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-28EL9LWGDY" />
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-28EL9LWGDY');
-          `}
-        </Script>
-      </head>
+
       <body className={`${geistSans.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
@@ -162,6 +151,10 @@ export default function RootLayout({
                     <div className="max-w-4xl space-y-2">
                       <p>
                         &copy; 2026 Ticonomía. Todos los derechos reservados. El uso de este sitio implica la aceptación de nuestra{" "}
+                        <Link href="/privacidad" className="underline decoration-foreground/30 underline-offset-2 hover:text-foreground">
+                          política de privacidad
+                        </Link>{" "}
+                        y{" "}
                         <Link href="/cookies" className="underline decoration-foreground/30 underline-offset-2 hover:text-foreground">
                           política de cookies
                         </Link>
@@ -180,8 +173,7 @@ export default function RootLayout({
             </div>
           </main>
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsProvider />
       </body>
     </html>
   );
