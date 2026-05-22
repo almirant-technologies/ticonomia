@@ -42,7 +42,7 @@ export const publishedBlogs: Omit<BlogPost, 'content'>[] = [
   datePublished: "2026-05-22",
   readingTime: "5 min",
   author: "Ignacio Garcia",
-  file: "content/blogs/tpm-tbp.md",
+  file: "content/blogs/TPM-TBP.md",
 },
   {
     slug: "escudo-financiero",
@@ -52,7 +52,7 @@ export const publishedBlogs: Omit<BlogPost, 'content'>[] = [
     datePublished: "2026-05-22",
     readingTime: "5 min",
     author: "Ignacio Garcia",
-    file: "content/blogs/escudo-financiero.md",
+    file: "content/blogs/Escudo-financiero.md",
   },
 ];
 
