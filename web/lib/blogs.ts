@@ -45,15 +45,15 @@ export const publishedBlogs: Omit<BlogPost, 'content'>[] = [
   file: "content/blogs/tpm-tbp.md",
 },
   {
-  slug: "escudo-financiero",
-  title: "El Escudo Financiero de Costa Rica",
-  subtitle: "¿Por qué las Reservas Internacionales del BCCR alcanzan récords históricos?",
-  headerImage: "/blog-images/grafica-reservas.jpg", // Asegúrate de que exista en /web/public
-  datePublished: "2026-05-22",
-  readingTime: "5 min",
-  author: "Ignacio Garcia",
-  file: "content/blogs/escudo-financiero.md",
-},
+    slug: "escudo-financiero",
+    title: "El Escudo Financiero de Costa Rica",
+    subtitle: "¿Por qué las Reservas Internacionales del BCCR alcanzan récords históricos?",
+    headerImage: "/blog-images/grafica-reservas.png", // Asegúrate de que exista en /web/public
+    datePublished: "2026-05-22",
+    readingTime: "5 min",
+    author: "Ignacio Garcia",
+    file: "content/blogs/escudo-financiero.md",
+  },
 ];
 
 
