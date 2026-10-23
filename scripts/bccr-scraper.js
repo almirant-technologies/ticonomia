@@ -1,3 +1,11 @@
+/**
+ * DEPRECATED: This scraping script is no longer functional because the legacy BCCR
+ * page (https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/frmConsultaTCVentanilla.aspx)
+ * has been decommissioned by the Central Bank of Costa Rica.
+ * 
+ * Please use `bccr-api-sync.js` instead, which connects directly to the new
+ * BCCR Indicadores Económicos (SDDE) API.
+ */
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
